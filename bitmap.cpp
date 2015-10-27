@@ -98,7 +98,7 @@ void BMPimage::encode(char *encFile)
     f.seekg(0,ios::beg);
     int ctr = 0;
 
-    while(!f.eof())
+    do
     {
         f>>c;
         for(int j=7;j>=0;j--)
@@ -107,11 +107,7 @@ void BMPimage::encode(char *encFile)
             c/=2;
         }
         ctr+=8;
-    }
-    for(int i=0;i<8;++i)
-    {
-        data[i+ctr]+=1;
-    }
+    }while(!f.eof());
     f.close();
 }
 
@@ -130,8 +126,9 @@ void BMPimage::decode()
             msg+=((data[i+j]%2)*pow(2,j));
         }
        // cout<<msg;
-       if(msg==255)
+       if(msg==0)
        break;
+       else
         saveFile<<msg;
 
     }

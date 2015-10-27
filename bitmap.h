@@ -5,7 +5,7 @@
 using namespace std;
 #ifndef BITMAP_VAR
 #define BITMAP_VAR
-#pragma pack(1)
+#pragma pack(push,1)
 struct pixel
 {
     unsigned char r;

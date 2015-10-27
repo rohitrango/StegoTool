@@ -108,6 +108,10 @@ void BMPimage::encode(char *encFile)
         }
         ctr+=8;
     }
+    for(int i=0;i<8;++i)
+    {
+        data[i+ctr]+=1;
+    }
     f.close();
 }
 
@@ -123,9 +127,11 @@ void BMPimage::decode()
         msg=0;
         for(int j=0;j<8;j++)
         {
-            msg+=((data[i+j]%2)*pow(2,7-j));
+            msg+=((data[i+j]%2)*pow(2,j));
         }
        // cout<<msg;
+       if(msg==255)
+       break;
         saveFile<<msg;
 
     }

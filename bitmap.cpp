@@ -123,7 +123,7 @@ void BMPimage::decode()
         msg=0;
         for(int j=0;j<8;j++)
         {
-            msg+=((data[i+j]%2)*pow(2,j));
+            msg+=((data[i+j]%2)*pow(2,7-j));
         }
        // cout<<msg;
        if(msg==0)

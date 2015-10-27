@@ -128,7 +128,6 @@ void BMPimage::decode()
        // cout<<msg;
        if(msg==0)
        break;
-       else
         saveFile<<msg;
 
     }

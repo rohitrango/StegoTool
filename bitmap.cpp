@@ -1,5 +1,5 @@
 #include"bitmap.h"
-
+#include<stdlib.h>
 BMPimage::~BMPimage()
 {
     delete[] data;
@@ -20,7 +20,7 @@ BMPimage::BMPimage(char* filename)
     fread(data, sizeof(unsigned char), size, f); // read the rest of the data at once
     fclose(f);
 
-    for(i = 0; i < size; i += 3)
+    for(unsigned int i = 0; i < size; i += 3)
     {
             unsigned char tmp = data[i];
             data[i] = data[i+2];
@@ -31,12 +31,11 @@ BMPimage::BMPimage(char* filename)
 void BMPimage::writeBMP(char *filename)
 {
 
-    int i=0;
     FILE *f = fopen(filename,"wb");
 
    // unsigned char *newdata = new unsigned char[size];
    // newdata = data;
-    for(i = 0; i < size; i += 3)
+    for(unsigned int i = 0; i < size; i += 3)
     {
             unsigned char tmp = data[i];
             data[i] = data[i+2];
@@ -80,7 +79,7 @@ void BMPimage::changePIXEL( pixel p, int x, int y)
 
 void BMPimage::convertImage()
 {
-    for(int i=0;i<size;i++)
+    for(unsigned int i=0;i<size;i++)
         if(data[i]%2)
             data[i]--;
 }
@@ -91,10 +90,14 @@ void BMPimage::encode(char *encFile)
     convertImage();
     fstream f(encFile);
     char c;
-    long int sizeFile;
-
+    unsigned long int sizeFile;
     f.seekg(0,ios::end);
     sizeFile = f.tellg();
+    if(sizeFile>=size/8)
+    {
+        cout<<"Given File too large";
+        exit(0);
+    }
     f.seekg(0,ios::beg);
     int ctr = 0;
 
@@ -118,7 +121,7 @@ void BMPimage::decode()
     cin>>save;
     ofstream saveFile(save);
 
-    for(int i=0;i<size;i+=8)
+    for(unsigned int i=0;i<size;i+=8)
     {
         msg=0;
         for(int j=0;j<8;j++)
@@ -128,6 +131,7 @@ void BMPimage::decode()
        // cout<<msg;
        if(msg==0)
        break;
+       else
         saveFile<<msg;
 
     }

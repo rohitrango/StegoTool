@@ -18,6 +18,7 @@ class BMPimage
     unsigned char info[54];
     int width;
     int height;
+    unsigned int bitDepth;
     unsigned int size;
     unsigned char* data;
 

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include<fstream>
 #include<cmath>
+#include<cstdlib>
 using namespace std;
 #ifndef BITMAP_VAR
 #define BITMAP_VAR
@@ -30,6 +31,8 @@ class BMPimage
 
     public:
 
+    void EncodeFile1();
+    void DecodeFile1();
     BMPimage(char *filename); //constructor
     int getBitDepth();
     void writeBMP(char *filename);      //write into file

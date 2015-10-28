@@ -1,5 +1,6 @@
 #include"bitmap.h"
 #include<stdlib.h>
+
 BMPimage::~BMPimage()
 {
     delete[] data;
@@ -146,8 +147,10 @@ void BMPimage::decode()             //test algorithm to decode files
        // cout<<msg;
        if(msg==0)
        break;
-       else
+       else if(msg!=32)
         saveFile<<msg;
+        else if(msg==32)
+            saveFile<<" ";
 
     }
     saveFile.close();

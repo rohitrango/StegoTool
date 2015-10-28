@@ -8,23 +8,30 @@ using namespace std;
 #pragma pack(push,1)
 struct pixel
 {
-    unsigned char r;
-    unsigned char g;
     unsigned char b;
+    unsigned char g;
+    unsigned char r;
+    unsigned char a;
+
+    pixel()
+    {
+        r=g=b=a=0;
+    }
 };
 class BMPimage
 {
     int i;
-    unsigned char info[54];
+    unsigned char info[54] , bitDepth;
     int width;
     int height;
-    unsigned int bitDepth;
     unsigned int size;
     unsigned char* data;
+    int channels;
 
     public:
 
-    BMPimage(char *filename);           //constructor
+    BMPimage(char *filename); //constructor
+    int getBitDepth();
     void writeBMP(char *filename);      //write into file
     const unsigned int getSIZE();       //returns the size of the file
     const int getWIDTH();               //returns the width of the image

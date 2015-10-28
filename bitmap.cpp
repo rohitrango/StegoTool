@@ -161,3 +161,64 @@ int BMPimage::getBitDepth()
 {
         return bitDepth;
 }
+
+//Encode1 is made by Rohit
+
+void BMPimage::EncodeFile1()
+{
+    char fileName[100],c;
+    cout<<"Enter the name of the file to hide.";
+    cin>>fileName;
+
+    FILE *encFile;
+    encFile = fopen(fileName,"r+");
+
+    int index=0 , j=0;
+    convertImage();
+    while(!feof(encFile))
+    {
+        c = fgetc(encFile);
+
+        for(j=7;j>=0;j--)
+        {
+            data[index+j] += (c%2);
+            c/=2;
+        }
+        index+=8;
+        if(index>=size)
+        {
+            cout<<"File is too large.";
+            break;
+        }
+
+    }
+
+    cout<<"Save encoded image as ...";
+    cin>>fileName;
+    writeBMP(fileName);
+    fclose(encFile);
+
+    cout<<"File successfully encoded.\n";
+
+
+}
+
+void BMPimage::DecodeFile1()
+{
+    char fileName[100];
+    cout<<"Save file as...";
+        cin>>fileName;
+        FILE *saveFile = fopen(fileName,"a+");
+        int index=0,c=0;
+        do{
+             c=0;
+            for(int j=0;j<8;j++)
+                c+=(data[index+j]%2)*pow(2,7-j);
+
+            fputc(c,saveFile);
+            index+=8;
+
+        }while(c!=0);
+
+        fclose(saveFile);
+}

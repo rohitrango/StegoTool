@@ -75,9 +75,45 @@ pixel BMPimage::getPIXEL( int x, int y)
     return p;
 }
 
+pixel BMPimage::getPIXEL(int index)
+{
+    pixel p;
+    if(channels==3)
+    {
+        p.b = data[index];
+        p.g = data[index+1];
+        p.r = data[index+2];
+    }
+    else if(channels==4)
+    {
+        p.b = data[index];
+        p.g = data[index+1];
+        p.r = data[index+2];
+        p.a = data[index+3];
+    }
+    return p;
+}
+
 void BMPimage::changePIXEL( pixel p, int x, int y)
 {
     int index = (y*width+x)*channels;
+    if(channels==3)
+    {
+        data[index] = p.b;
+        data[index+1] = p.g;
+        data[index+2] = p.r;
+    }
+    else if(channels==4)
+    {
+        data[index] = p.b;
+        data[index+1] = p.g;
+        data[index+2] = p.r;
+        data[index+3] = p.a;
+    }
+}
+
+void BMPimage::changePIXEL( pixel p, int index)
+{
     if(channels==3)
     {
         data[index] = p.b;
@@ -162,9 +198,8 @@ int BMPimage::getBitDepth()
         return bitDepth;
 }
 
-//Encode1 is made by Rohit
 
-void BMPimage::EncodeFile1()
+void BMPimage::EncodeLSB()
 {
     char fileName[100],c;
     cout<<"Enter the name of the file to hide.";
@@ -203,8 +238,10 @@ void BMPimage::EncodeFile1()
 
 }
 
-void BMPimage::DecodeFile1()
+void BMPimage::DecodeLSB()
 {
+
+
     char fileName[100];
     cout<<"Save file as...";
         cin>>fileName;
@@ -222,3 +259,136 @@ void BMPimage::DecodeFile1()
 
         fclose(saveFile);
 }
+
+
+void BMPimage::pseudoEncode()
+{
+    long unsigned int index=0;
+    char fileName[100],c;
+    cout<<"Enter the name of file to hide.\n";
+    cin>>fileName;
+    FILE *f = fopen(fileName,"r+");
+    pixel p;
+    while(!feof(f))
+    {
+        index = (height*index + width)%size;
+        //p = getPIXEL(index);
+        c = fgetc(f);
+        cout<<".";
+        //cout<<(int)c <<" ";
+        data[index] = c;
+        //changePIXEL(p,index);
+    }
+
+    cout<<"Save encoded image as ...";
+    cin>>fileName;
+    writeBMP(fileName);
+    fclose(f);
+
+    cout<<"File successfully encoded.\n";
+}
+
+void BMPimage::pseudoDecode()
+{
+    long unsigned int index=0;
+    char fileName[100],c;
+    pixel p;
+    //int i=0;
+    cout<<"Save file as...";
+        cin>>fileName;
+        FILE *saveFile = fopen(fileName,"a+");
+    do
+    {
+        index = (height*index + width)%size;
+        //p = getPIXEL(index);
+        c = data[index];
+        fputc(c,saveFile);
+        //i++;
+    }while(c!=0);
+
+    fclose(saveFile);
+
+}
+
+
+void BMPimage::blueEncode()             //has some bugs to be fixed
+{
+    long unsigned int index=channels;
+    char fileName[100],c;
+    cout<<"Enter the name of file to hide.\n";
+    cin>>fileName;
+    FILE *f = fopen(fileName,"r+");
+
+    if(channels==3)
+        data[0]=data[1]=data[2]=0;
+    else if(channels==4)
+        data[0]=data[1]=data[2]=data[3]=0;
+
+    while(!feof(f))
+    {
+        if((int)data[index]>150)
+        {
+            c = fgetc(f);
+            data[index+2]=c;
+            data[index] = c;
+        }
+        index+=channels;
+        if(index>size)
+            break;
+    }
+
+    if(!feof(f))
+    {
+        cout<<"File is too large.\n";
+        for(int i=0;i<channels;i++)
+            data[i]=255;
+
+    }
+    else
+    {
+    cout<<"Save encoded image as ...";
+    cin>>fileName;
+    writeBMP(fileName);
+    cout<<"File successfully encoded.\n";
+    }
+    fclose(f);
+
+
+}
+
+void BMPimage::blueDecode()
+{
+    long unsigned int index=channels;
+    char fileName[100],c;
+
+    bool checkEncode = true;
+    for(int i=0;i<channels;i++)
+        if(data[i]!=0)
+            checkEncode = false;
+
+    if(!checkEncode)
+    {
+        cout<<"No file is encoded in the image.\n";
+    }
+    else
+    {
+        cout<<"Save file as...";
+        cin>>fileName;
+        FILE *saveFile = fopen(fileName,"a+");
+
+        while(c!=0)
+        {
+            if(data[index+2]==data[index])
+            {
+                c = data[index];
+                fputc(c,saveFile);
+            }
+            index+=channels;
+        }
+
+
+        fclose(saveFile);
+    }
+
+}
+

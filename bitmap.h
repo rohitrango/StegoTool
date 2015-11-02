@@ -31,8 +31,12 @@ class BMPimage
 
     public:
 
-    void EncodeFile1();
-    void DecodeFile1();
+    void pseudoEncode();
+    void pseudoDecode();
+    void blueEncode();
+    void blueDecode();
+    void EncodeLSB();
+    void DecodeLSB();
     BMPimage(char *filename); //constructor
     int getBitDepth();
     void writeBMP(char *filename);      //write into file
@@ -40,12 +44,15 @@ class BMPimage
     const int getWIDTH();               //returns the width of the image
     const int getHEIGHT();              //returns the height of the image
     pixel getPIXEL( int x, int y);
+    pixel getPIXEL(int index);
     void changePIXEL( pixel p, int x, int y);
+    void changePIXEL( pixel p, int index);
     void convertImage();
     void encode(char* encFile);
     void decode();
     ~BMPimage();
 };
+
 
 #pragma pack(pop)
 #endif

@@ -15,7 +15,8 @@ Some test image files are given as well. Please feel free to choose your own BMP
 Entering wrong password in the encoding procedures can give garbage text files. So do remember to enter the correct password.
 
 Made by-
-Nilesh Gupta (Roll 150050059)
-Rohit Kumar Jena (Roll 150050061)
+Nilesh Gupta (Roll 150050059) <br>
+Rohit Kumar Jena (Roll 150050061) <br>
 
-# NOTE - Program was made for Windows, please remove functions like conio.h , etc.
+#### NOTE - Program was made for Windows, please remove functions like conio.h , etc.
+##### If interested, you can add code for ubuntu as well.

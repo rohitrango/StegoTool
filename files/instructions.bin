@@ -1,0 +1,15 @@
+Instructions-
+
+	1.  The tool is very simple to use. Just press the number keys against the option that you want to do. For example, to encode a text in a bitmap image, simply press "1" from the Main Menu. Similarly, you can navigate through the entire program using the number keys shown on the screen.
+	2.  The program only works for bitmap (.bmp) files and only text files (.txt) files can be hidden.
+	3.  Before encoding/decoding, please ensure that the host image (the original image), the text file to be hidden, and the encoded image are in the same directory as that of the executable. (In the LSB method the host image is not required while decoding).
+
+	LSB is the most system heavy but data can be more easily extracted.
+	Filter algorithm and Pseudo Sequence algorithm use password to hide data, but require the original host file as well.
+
+Navigation
+----------------------------------------
+1.Go back to Main Menu
+
+
+

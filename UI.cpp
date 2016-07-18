@@ -1,17 +1,17 @@
 #include "UI.h"
 
 
-UserInterface::UserInterface()
+UserInterface::UserInterface()         
 {
     char c[50] = "files/mainScreen.bin" ;
     printScreen(c);
-    getch();
+    _getch();
 }
 
 
 // This is the reference to the given getch function, since we didnot know how to create and modify with buffered and non-buffered input
 // http://stackoverflow.com/questions/3276546/how-to-implement-getch-function-of-c-in-linux
-/*int UserInterface::getch(void)
+int UserInterface::_getch(void)
 {
     struct termios oldattr, newattr;
     int ch;
@@ -22,7 +22,7 @@ UserInterface::UserInterface()
     ch = getchar();
     tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
     return ch;
-}*/
+} 
 
 void UserInterface::clear()
 {
@@ -33,7 +33,7 @@ void UserInterface::clear()
 
 bool UserInterface::Encode()
 {
-    system("cls");
+    system("clear");
     bool check =true;
     char c[100];
     cout<<"Enter name of image to encode/decode.\n";
@@ -51,7 +51,7 @@ bool UserInterface::Encode()
     choice ='0';
     do
     {
-        cin>>choice;
+        choice = _getch();
     }while(!(choice=='1' or choice=='2' or choice=='3' or choice=='4' or choice=='5' or choice=='6'));
 
     switch(choice)
@@ -69,12 +69,12 @@ bool UserInterface::Encode()
 
 void UserInterface::printScreen(char *c)
 {
-    system("cls");
+    system("clear");
     FILE *openFile;
     openFile = fopen(c,"a+");
     char ch;
     int i=0;
-
+   
     fseek(openFile,-1,SEEK_END);
     int size = ftell(openFile);
     fseek(openFile,0,SEEK_SET);
@@ -99,7 +99,7 @@ void UserInterface::showMainMenu(bool check=true)
         cout<<"The file you tried to open either doesnot exist in the directory or is corrupt.\n";
 
     do{
-    cin>>choice;
+    choice = _getch();
     }while(!(choice=='1' or choice=='2' or choice=='3' or choice=='4'));
 
     switch(choice)
@@ -110,7 +110,7 @@ void UserInterface::showMainMenu(bool check=true)
                     break;
         case '3':   showAbout();
                     break;
-        case '4':   system("cls");
+        case '4':   system("clear");
                     exit(0);
         default: cout<<"\nUnexpected error.\n";
     }
@@ -125,7 +125,7 @@ void UserInterface::showInstructions()
 
     do
     {
-        cin>>choice;
+        choice = _getch();
     }while(choice!='1');
     showMainMenu();
 }
@@ -138,7 +138,7 @@ void UserInterface::showAbout()
 
     do
     {
-        cin>>choice;
+        choice = _getch();
     }while(choice!='1');
     showMainMenu();
 }

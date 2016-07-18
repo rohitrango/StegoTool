@@ -1,6 +1,5 @@
 #include"bitmap.h"
-#ifndef n
-#define n
+
 
 BMPimage::~BMPimage()
 {
@@ -12,7 +11,7 @@ BMPimage::BMPimage(char* filename)
     FILE* f = fopen(filename, "rb");
     if(!f)
     {
-        cout<<"Invalid name of given file \nExiting interface\n";
+        //cout<<"Invalid name of given file \nExiting interface\n";
         size= 0;
         return;
     }
@@ -365,4 +364,3 @@ bool BMPimage::filterDecode()
     delete[] laplace;
     return true;
 }
-#endif

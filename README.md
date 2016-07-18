@@ -1,5 +1,6 @@
-## Steganography Tool 
+### Steganography Tool 
 
+#### Introduction 
 This program is an example to show how files can be hidden inside an image by modifying the pixel data. In this mini steganography tool, bitmap images are used and text files are hidden in it. Other file types may give unexpected results.
 
 To use this tool, simply press the number keys corresponding to the list items shown in the menu.
@@ -14,9 +15,36 @@ Some test image files are given as well. Please feel free to choose your own BMP
 
 Entering wrong password in the encoding procedures can give garbage text files. So do remember to enter the correct password.
 
-Made by-
-Nilesh Gupta (Roll 150050059) <br>
-Rohit Kumar Jena (Roll 150050061) <br>
 
-#### NOTE - Program was made for Windows, please remove functions like conio.h , etc.
-##### If interested, you can add code for ubuntu as well.
+#### Creating the executable
+
+Use the following command - 
+<code>g++ UI.cpp UIMain.cpp bitmap_r.cpp bitmap_n.cpp </code>
+
+Run by typing this in the terminal - <code>./a.out</code>
+
+
+### Credits-
+
+Made by Nilesh Gupta -
+
+1. bitmap_n.cpp
+2. bitmap.h
+3. (Searched articles for algorithms for encoding/decoding)
+
+Made by Rohit Kumar Jena -
+
+1. bitmap_r.cpp
+2. UI.cpp
+3. UI.h
+4. All the .bin files, fileWriter.cpp , and this README file.
+
+The encode/decode test algorithm (in bitmap_n.cpp) was used as a framework for development of other encode/decode algorithms.
+
+Thank you.
+
+Made by-
+Nilesh Gupta (Roll 150050059)
+Rohit Kumar Jena (Roll 150050061)
+
+

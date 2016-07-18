@@ -1,6 +1,5 @@
 #include "bitmap.h"
-#ifndef r
-#define r
+
 
 bool BMPimage::EncodeLSB()
 {
@@ -35,7 +34,7 @@ bool BMPimage::EncodeLSB()
             c/=2;
         }
         index+=8;
-
+        
 
     }
     data[2] = sizeFile%256;
@@ -205,4 +204,3 @@ bool BMPimage::pseudoDecode()
     delete[] hash;
     return true;
 }
-#endif

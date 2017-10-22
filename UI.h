@@ -1,23 +1,34 @@
 #include "bitmap.h"
 #include <iostream>
 #include <cstdlib>
-#include <termios.h>  //for getch
-#include <unistd.h>	  //for getch
 #include <cstdio>     //for getchar
 #include <fstream>
+
+#ifdef WIN32
+    #include <conio.h>
+#else
+    #include <termios.h>  //for getch
+    #include <unistd.h>  //for getch
+#endif
+
 using namespace std;
 
 class UserInterface
 {
-	char choice;
-
+    char choice;
+    
 public:
-	void clear();
-	int _getch();
+    void clearScreen();
+    
+#ifndef WIN32
+    int _getch();
+#endif
+    
     UserInterface();
-	void showMainMenu(bool check);
-	bool Encode();
-	void showInstructions();
-	void showAbout();
-	void printScreen(char *c);
+    
+    void showMainMenu(bool check);
+    bool Encode();
+    void showInstructions();
+    void showAbout();
+    void printScreen(char *c);
 };

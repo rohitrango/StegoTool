@@ -210,6 +210,7 @@ bool BMPimage::filterEncode()
         for(int j=1;j<height-1;++j)
         {
             unsigned char p;
+            
             p = max(this->getPIXEL(i,j-1).r,(max(this->getPIXEL(i,j-1).b,this->getPIXEL(i,j-1).g)));
             p += max(this->getPIXEL(i,j+1).r,(max(this->getPIXEL(i,j+1).b,this->getPIXEL(i,j+1).g)));
             p += max(this->getPIXEL(i-1,j).r,(max(this->getPIXEL(i-1,j).b,this->getPIXEL(i-1,j).g)));

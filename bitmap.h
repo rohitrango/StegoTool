@@ -5,6 +5,10 @@
 #include <cstdlib>
 #include <cstdio>
 
+#ifdef WIN32
+	#include <algorithm>
+#endif
+
 using namespace std;
 
 #ifndef BITMAP_VAR

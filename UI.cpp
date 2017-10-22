@@ -1,7 +1,6 @@
 #include "UI.h"
 
-
-UserInterface::UserInterface()         
+UserInterface::UserInterface()
 {
     char c[50] = "files/mainScreen.bin" ;
     printScreen(c);
@@ -9,6 +8,7 @@ UserInterface::UserInterface()
 }
 
 
+#ifndef WIN32
 // This is the reference to the given getch function, since we didnot know how to create and modify with buffered and non-buffered input
 // http://stackoverflow.com/questions/3276546/how-to-implement-getch-function-of-c-in-linux
 int UserInterface::_getch(void)
@@ -23,28 +23,32 @@ int UserInterface::_getch(void)
     tcsetattr( STDIN_FILENO, TCSANOW, &oldattr );
     return ch;
 } 
+#endif
 
-void UserInterface::clear()
+void UserInterface::clearScreen()
 {
-  for(int i=0;i<10;i++)
-    cout<<"\n\n\n";
+#ifdef WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 }
 
 
 bool UserInterface::Encode()
 {
-    system("clear");
-    bool check =true;
+    clearScreen();
     char c[100];
+    
     cout<<"Enter name of image to encode/decode.\n";
     cin>>c;
     BMPimage image(c);
 
     if(image.getSIZE()==0)
-       {
+    {
         cout<<"File doesnot exist or is corrupt. Exiting program.\n";
         exit(0);
-       }
+    }
 
     char fileName[100] = "files/encode.bin";
     printScreen(fileName);
@@ -52,7 +56,7 @@ bool UserInterface::Encode()
     do
     {
         choice = _getch();
-    }while(!(choice=='1' or choice=='2' or choice=='3' or choice=='4' or choice=='5' or choice=='6'));
+    }while(!(choice=='1' || choice=='2' || choice=='3' || choice=='4' || choice=='5' || choice=='6'));
 
     switch(choice)
     {
@@ -69,28 +73,28 @@ bool UserInterface::Encode()
 
 void UserInterface::printScreen(char *c)
 {
-    system("clear");
+    clearScreen();
     FILE *openFile;
     openFile = fopen(c,"a+");
     char ch;
     int i=0;
-   
+    
     fseek(openFile,-1,SEEK_END);
     int size = ftell(openFile);
     fseek(openFile,0,SEEK_SET);
-
+    
     while(!feof(openFile))
-        {
-            if(i==size)
-                break;
-            ch = fgetc(openFile);
-            cout<<ch;
-            i++;
-        }
+    {
+        if(i==size)
+            break;
+        ch = fgetc(openFile);
+        cout<<ch;
+        i++;
+    }
     fclose(openFile);
 }
 
-void UserInterface::showMainMenu(bool check=true)
+void UserInterface::showMainMenu(bool check = true)
 {
     char c[50] = "files/mainMenu.bin";
     printScreen(c);
@@ -100,7 +104,7 @@ void UserInterface::showMainMenu(bool check=true)
 
     do{
     choice = _getch();
-    }while(!(choice=='1' or choice=='2' or choice=='3' or choice=='4'));
+    }while(!(choice=='1' || choice=='2' || choice=='3' || choice=='4'));
 
     switch(choice)
     {
@@ -110,7 +114,7 @@ void UserInterface::showMainMenu(bool check=true)
                     break;
         case '3':   showAbout();
                     break;
-        case '4':   system("clear");
+        case '4':   clearScreen();
                     exit(0);
         default: cout<<"\nUnexpected error.\n";
     }

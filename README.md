@@ -1,6 +1,6 @@
-### Steganography Tool 
+# Steganography Tool 
 
-#### Introduction 
+## Introduction 
 This program is an example to show how files can be hidden inside an image by modifying the pixel data. In this mini steganography tool, bitmap images are used and text files are hidden in it. Other file types may give unexpected results.
 
 To use this tool, simply press the number keys corresponding to the list items shown in the menu.
@@ -15,16 +15,23 @@ Some test image files are given as well. Please feel free to choose your own BMP
 
 Entering wrong password in the encoding procedures can give garbage text files. So do remember to enter the correct password.
 
+## Building
+#### Windows
+1. Install MinGW32 and MSYS
+2. Open the Mingw32 shell
+3. Navigate to the project root
+2. Use the following command - <code>make</code>
 
-#### Creating the executable
+Run with the command - <code>stego.exe</code>
 
-Use the following command - 
-<code>g++ UI.cpp UIMain.cpp bitmap_r.cpp bitmap_n.cpp </code>
+#### Ubuntu
+1. Install g++ with - <code>sudo apt-get install g++</code>
+2. Navigate to the project root
+3. Use the following command - <code>make</code>
 
-Run by typing this in the terminal - <code>./a.out</code>
+Run with the command - <code>./stego.out</code>
 
-
-### Credits-
+## Credits-
 
 Made by Nilesh Gupta -
 
@@ -46,5 +53,3 @@ Thank you.
 Made by-
 Nilesh Gupta (Roll 150050059)
 Rohit Kumar Jena (Roll 150050061)
-
-

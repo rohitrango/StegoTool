@@ -6,7 +6,7 @@
 #include <cstdio>
 
 #ifdef WIN32
-	#include <algorithm>
+    #include <algorithm>
 #endif
 
 using namespace std;

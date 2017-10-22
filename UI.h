@@ -5,10 +5,10 @@
 #include <fstream>
 
 #ifdef WIN32
-	#include <conio.h>
+    #include <conio.h>
 #else
-	#include <termios.h>  //for getch
-	#include <unistd.h>	  //for getch
+    #include <termios.h>  //for getch
+    #include <unistd.h>  //for getch
 #endif
 
 using namespace std;

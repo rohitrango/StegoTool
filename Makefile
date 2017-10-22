@@ -14,13 +14,19 @@ CFLAGS  = -g -Wall
 OBJ = obj
 APP = stego
 
-default: $(APP).exe
+ifeq ($(OS),Windows_NT)
+EXT = exe
+else
+EXT = out
+endif
+
+default: $(APP).$(EXT)
 
 # To create the executable file stego.out we need the object files
 # bitmap_n.o, bitmap_r.o, and UI.o:
 #
-$(APP).exe:  dirs bitmap_n.o bitmap_r.o UI.o main.o
-	$(CC) $(CFLAGS) $(OBJ)/bitmap_n.o $(OBJ)/bitmap_r.o $(OBJ)/UI.o $(OBJ)/main.o -o $(APP).exe
+$(APP).$(EXT):  dirs bitmap_n.o bitmap_r.o UI.o main.o
+	$(CC) $(CFLAGS) $(OBJ)/bitmap_n.o $(OBJ)/bitmap_r.o $(OBJ)/UI.o $(OBJ)/main.o -o $(APP).$(EXT)
 
 # To create the object files, we need the output directories
 dirs:
@@ -55,4 +61,4 @@ bitmap_r.o:  bitmap_r.cpp bitmap.h
 # files and *~ backup files:
 #
 clean:
-	$(RM) bin/*.o *~ $(APP).exe
+	$(RM) bin/*.o *~ $(APP).$(EXT)

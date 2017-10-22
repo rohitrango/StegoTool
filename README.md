@@ -20,16 +20,14 @@ Entering wrong password in the encoding procedures can give garbage text files. 
 1. Install MinGW32 and MSYS
 2. Open the Mingw32 shell
 3. Navigate to the project root
-2. Use the following command - <code>make</code>
-
-Run with the command - <code>stego.exe</code>
+2. Make the project: <code>make</code>
+4. Run the program: <code>stego.exe</code>
 
 #### Ubuntu
-1. Install g++ with - <code>sudo apt-get install g++</code>
+1. Install g++: <code>sudo apt-get install g++</code>
 2. Navigate to the project root
-3. Use the following command - <code>make</code>
-
-Run with the command - <code>./stego.out</code>
+3. Make the project: <code>make</code>
+4. Run the program: <code>./stego.out</code>
 
 ## Credits-
 
